@@ -15,7 +15,7 @@ module.exports = {
     pages: {
         index: {
             entry: 'src/main.js',
-            title: 'Mini Banking Online',
+            title: 'みにばん！',
         }
     }
 };

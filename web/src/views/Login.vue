@@ -2,7 +2,7 @@
   <div class="container">
     <div class="card">
       <div class="card-header">
-        <h3>Welcome Miniban</h3>
+        <h3>ようこそ、みにばん！へ</h3>
       </div>
       <div class="container">
         <form v-on:submit.prevent="doLogin">

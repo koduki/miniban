@@ -32,7 +32,7 @@ import moment from "moment";
 export default {
   filters: {
     toMoney: function(money) {
-      return "$" + money.toLocaleString();
+      return "￥" + money.toLocaleString();
     },
     moment(date) {
       return moment(date).format("YYYY/MM/DD HH:mm");
