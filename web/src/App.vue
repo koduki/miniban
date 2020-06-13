@@ -1,11 +1,11 @@
 <template>
   <div id="app" class="container">
-    <herdear id="topbar">
+    <header id="topbar">
       <a href="/">
         <p class="title">みにばん！</p>
         <p class="subtitle">オンラインバンキングサービス</p>
       </a>
-    </herdear>
+    </header>
     <nav class="navbar navbar-expand-sm bg-light">
       <ul class="navbar-nav">
         <li class="nav-item">
