@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniban.models.vo;
+package miniban.core.models.vo;
 
 import java.time.ZonedDateTime;
 

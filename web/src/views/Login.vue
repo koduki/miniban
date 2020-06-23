@@ -10,7 +10,6 @@
             <label for="input-username" class="col-sm-3">Customer ID</label>
             <div class="col-sm-9">
               <input
-                id="input-username"
                 type="text"
                 class="form-control"
                 placeholder="customer id"
@@ -24,7 +23,6 @@
               <input
                 type="password"
                 class="form-control"
-                id="input-password"
                 placeholder="password"
                 v-model="user.password"
               />

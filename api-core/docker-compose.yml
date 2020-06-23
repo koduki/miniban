@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: src/main/docker/Dockerfile.jvm
+    ports:
+      - 8080:8080
+    environment:
+      - QUARKUS_DATASOURCE_URL=jdbc:postgresql://db:5432/dev
+      - QUARKUS_DATASOURCE_USERNAME=dev
+      - QUARKUS_DATASOURCE_PASSWORD=secret
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=secret

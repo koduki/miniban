@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+    api-core:
+        image: maven
+        command: mvn clean compile quarkus:dev
+        volumes:
+            - ~/.m2:/root/.m2 
+            - ./api-core:/app
+        working_dir: /app
+        ports:
+            - "5000:5000"
+        environment:
+            - MINIBAN_JAEGER_URL=http://monitor:14268/api/traces
+        depends_on:
+            - monitor
     api-endpoint:
         image: maven
         command: mvn clean compile quarkus:dev
@@ -10,6 +23,12 @@ services:
         working_dir: /app
         ports:
             - "8080:8080"
+        environment:
+            - MINIBAN_API_CORE_URL=http://api-core:5000
+            - MINIBAN_JAEGER_URL=http://monitor:14268/api/traces
+        depends_on:
+            - api-core
+            - monitor
     web:
         image: node
         command: yarn serve
@@ -20,3 +39,9 @@ services:
             - "3000:3000"
         depends_on:
             - api-endpoint
+    monitor:
+        image: jaegertracing/all-in-one
+        ports:
+            - "16686:16686"
+            - "14250:14250"
+            - "14268:14268"

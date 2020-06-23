@@ -1,0 +1,33 @@
+####
+# This Dockerfile is used in order to build a container that runs the Quarkus application in JVM mode
+#
+# Before building the docker image run:
+#
+# mvn package
+#
+# Then, build the image with:
+#
+# docker build -f src/main/docker/Dockerfile.jvm -t quarkus/mini-bank .
+#
+# Then run the container using:
+#
+# docker run -i --rm -p 8080:8080 quarkus/mini-bank 
+#
+###
+#FROM fabric8/java-alpine-openjdk11
+FROM fabric8/java-centos-openjdk11-jre
+ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV AB_ENABLED=jmx_exporter
+COPY target/lib/* /deployments/lib/
+COPY target/*-runner.jar /deployments/app.jar
+EXPOSE 8080
+
+# run with user 1001 and be prepared for be running in OpenShift too
+USER root
+RUN adduser -G root --no-create-home quarkus \
+  && chown -R quarkus /deployments \
+  && chmod -R "g+rwX" /deployments \
+  && chown -R quarkus:root /deployments
+USER quarkus
+
+ENTRYPOINT [ "/deployments/run-java.sh" ]

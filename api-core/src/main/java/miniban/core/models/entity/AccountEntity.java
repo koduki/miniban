@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package miniban.models.entity;
+package miniban.core.models.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import java.time.ZoneId;
